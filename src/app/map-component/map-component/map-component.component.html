@@ -1,0 +1,20 @@
+<div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [usePanning]="true" (mapReady)="mapReady($event)">
+  <agm-marker *ngFor="let location of coordinates" [latitude]="location.lat" [longitude]="location.lng" (markerClick)='markerClicked(location)'></agm-marker>
+</agm-map>
+
+<div class="content">
+  <div class="row">
+    <input type="text" class="input" [(ngModel)]="longLatStr" placeholder="Latitude, Longtitude" #inputElement>
+    <button class="add-button" (click)="GetLongAndLat(longLatStr)">SAVE</button>
+  </div>
+  <div *ngIf="coordinates.length>0">
+    <div class="items-row" *ngFor="let item of coordinates">
+      <div class="item" (click)="markerClicked(item)">
+         <div><i class="fa fa-window-close close" (click)="remove(item)" aria-hidden="true"></i></div> 
+        {{item.lat}}, {{item.lng}}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
